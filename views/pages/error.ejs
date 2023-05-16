@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <%- include ("../partials/header.ejs") %>
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="containerBox errorBox">
+        <h1> Oups !</h1>
+        <h3> La page que vous cherchez est introuvable :( </h3>
+        <h3>
+          <%= code %> <%= message %>
+        </h3>
+        <a class="errorButton" href="javascript:history.back()">Retour à la page précédente</a>
+      </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,200 @@
+/* General */
+
+@font-face {
+    font-family: "DIN2014";
+    src: url('/fonts/DIN2014/DIN2014-Regular.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "AlternateGothicATF";
+    src: url('/fonts/AlternateGothicATF/alternate-gothic-atf.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font: 18px "DIN2014", sans-serif;
+    margin: 0;
+    background-image: url("/images/background.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+h1 {
+    font-family: "AlternateGothicATF";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.6em;
+    margin: 0;
+}
+
+h2 {
+    font-family: "AlternateGothicATF";
+    font-size: 1.4em;
+    font-weight: 400;
+    margin: 0;
+}
+
+h3 {
+    font-family: "AlternateGothicATF";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.2em;
+    margin: 0;
+}
+
+h4 {
+    font-family: "AlternateGothicATF";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.1em;
+}
+
+h5 {
+    font-family: "AlternateGothicATF";
+    font-weight: 400;
+    font-size: 1em;
+}
+
+a:link,
+a:visited,
+a:hover {
+    text-decoration: none;
+}
+
+.container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.containerBox {
+    color: white;
+    background: rgba(34, 34, 34, 0.95);
+    width: 450px;
+    border: 1px solid #494949;
+    border-radius: 5px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.boxTitle {
+    background-color: rgb(68, 68, 68);
+    padding: 10px;
+    border-bottom: 1px solid white;
+    width: 100%;
+}
+
+/* Error page */
+
+.errorBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.errorBox>* {
+    margin-bottom: 10px;
+}
+
+.errorButton {
+    padding: 10px;
+}
+
+/* Home page */
+
+.homeBox {
+    padding: 25px;
+    display: flex;
+    justify-content: center;
+}
+
+.homeForm {
+    font-family: "DIN2014";
+    display: grid;
+    grid-template-columns: 160px 200px;
+    grid-gap: 25px;
+}
+
+.homeForm button,
+.errorButton {
+    color: black;
+    font-family: "AlternateGothicATF";
+    font-size: 1em;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-style: hidden;
+    cursor: pointer;
+    background-color: #F39C12;
+    text-align: center;
+    border-radius: 5px;
+    grid-column: 1 / span 2;
+}
+
+.homeForm button:hover,
+.errorButton:hover {
+    background-color: #b06f09;
+}
+
+input,
+select {
+    border: 1px solid #494949;
+    height: 30px;
+}
+
+/* Result page */
+
+.resultBox {
+    width: 1200px;
+}
+
+.resultText {
+    padding: 20px;
+}
+
+.rowWrapper {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    border-bottom: 1px solid white;
+}
+
+.rowIndex {
+    border-right: 1px solid white;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.rowResult {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 205px);
+}
+
+.miniBoxWrapper{
+    display: grid;
+    grid-template-columns: 185px 20px;
+}
+
+.arrowBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.resultsMiniBox {
+    background-color: rgb(68, 68, 68);
+    padding: 5px;
+    margin: 20px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}

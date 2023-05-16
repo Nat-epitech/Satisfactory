@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <%- include ("../partials/header.ejs") %>
+</head>
+
+<body>
+  <div class="container">
+    <div class="containerBox">
+      <div class="boxTitle">
+        <h3>Produire:</h3>
+      </div>
+      <div class="homeBox">
+        <form class="homeForm" action="/result" method="get">
+          <label for="resourceWanted">Ressource:</label>
+          <select name="resourceWanted" id="resourceWanted" required>
+            <option disabled selected value="">Sélectionner une ressource</option>
+            <% resources.forEach(function(r) { %>
+              <option value=<%=r.idResource %>><%= r.resourceName %>
+              </option>
+              <% }); %>
+          </select>
+          <label for="resourceQuantity">Unités par minute:</label>
+          <input type="number" name="resourceQuantity" placeholder="" id="resourceQuantity" min="1" required>
+          <button>Calculer</button>
+        </form>
+      </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <%- include ("../partials/header.ejs") %>
+</head>
+
+<body>
+  <div class="container">
+    <div class="containerBox resultBox">
+      <div class="boxTitle">
+        <h2> Produire <%= quantity %> unités/min de <%= resource[0].resourceName %> </h2>
+      </div>
+      <div class="resultText">
+        <% recetteResources.forEach(function(r) { %>
+          <% if (r.resourceParent == -1) {%>
+            <p> - <%= r.quantity %> unités/min de <%= r.resourceName %></p>
+          <% } %>
+        <% }); %>
+      </div>
+      <% if (resource[0].resourceLvl> 1) { %>
+      <div class="boxTitle">
+        <h2>Coût détaillé:</h2>
+      </div>
+      <% recetteResources.forEach(function(rResParent) { %>
+        <% if (rResParent.resourceParent==-1) { %>
+          <div class="rowWrapper">
+            <div class="rowIndex">
+              <p> <%= rResParent.quantity %> unités/min de <%= rResParent.resourceName %> </p>
+            </div>
+            <div class="rowResult">
+              <% var idTargets=[]; %>
+                <% idTargets.push(rResParent.setId); %>
+                  <% while (true) { %>
+                    <% var foundElements=[]; %>
+                      <% var breakVar=true; %>
+                        <div class="colResult">
+                          <% for (let i=0; i < idTargets.length; i++) { %>
+                            <% recetteResources.forEach(function(rRes) { %>
+                              <% if (rRes.resourceParent==idTargets[i]) { %>
+                                <div class="miniBoxWrapper">
+                                <div class="resultsMiniBox">
+                                  <p> <%= rRes.nbrFactory %><%= rRes.factoryName %> <%= rRes.quantity %> unités/min de <%= rRes.resourceName %> </p>
+                                </div>
+                                <% foundElements.push(rRes.setId); %>
+                                <% if (rRes.resourceLvl> 0) { %>
+                                  <% breakVar=false %>
+                                  <div class="arrowBox">
+                                    <i class="fa-solid fa-arrow-left"></i>
+                                  </div>
+                                <% } %>
+                                </div>
+                              <% } %>
+                            <% }); %>
+                          <% } %>
+                        </div>
+                        <% if (breakVar == true) { %>
+                          <% break; %>
+                        <% } %>
+                        <% idTargets=foundElements; %>
+                  <% } %>
+            </div>
+          </div>
+          <% } %>
+        <% }); %>
+        <div class="boxTitle">
+          <h2>Coût en matière première:</h2>
+        </div>
+        <div class="resultText">
+          <% rawMaterial.forEach(function(r) { %>
+            <p> - <%= r.quantity %> unités/min de <%= r.resourceName %></p>
+          <% }); %>
+        </div>
+        <% } %>
+      <div class="boxTitle">
+        <h2>Coût en machine et électricité:</h2>
+      </div>
+      <div class="resultText">
+        <% nbrFactory.forEach(function(r) { %>
+          <p> - <%= r.nbr %> <%= r.factoryName %> (<%= r.price %> MW)</p>
+        <% }); %>
+        Total: <%= totalMW %> MW
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
