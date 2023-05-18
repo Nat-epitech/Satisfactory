@@ -21,9 +21,6 @@
 body {
     font: 18px "DIN2014", sans-serif;
     margin: 0;
-    background-image: url("/images/background.jpg");
-    background-size: cover;
-    background-position: center;
 }
 
 h1 {
@@ -73,6 +70,10 @@ a:hover {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-image: url("/images/background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 
 .containerBox {
@@ -153,6 +154,8 @@ select {
 
 .resultBox {
     width: 1200px;
+    max-height: 90vh;
+    overflow-y: auto;
 }
 
 .resultText {

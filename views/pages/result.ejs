@@ -40,7 +40,7 @@
                               <% if (rRes.resourceParent==idTargets[i]) { %>
                                 <div class="miniBoxWrapper">
                                 <div class="resultsMiniBox">
-                                  <p> <%= rRes.nbrFactory %><%= rRes.factoryName %> <%= rRes.quantity %> unités/min de <%= rRes.resourceName %> </p>
+                                  <p> <%= rRes.quantity %> unités/min de <%= rRes.resourceName %> </p>
                                 </div>
                                 <% foundElements.push(rRes.setId); %>
                                 <% if (rRes.resourceLvl> 0) { %>
