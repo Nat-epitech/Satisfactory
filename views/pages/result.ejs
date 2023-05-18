@@ -18,7 +18,24 @@
           <% } %>
         <% }); %>
       </div>
+      <div class="boxTitle">
+        <h2>Coût en machine et électricité:</h2>
+      </div>
+      <div class="resultText">
+        <% nbrFactory.forEach(function(r) { %>
+          <p> - <%= r.nbr %> <%= r.factoryName %> (<%= r.price %> MW)</p>
+        <% }); %>
+        Total: <%= totalMW %> MW
+      </div>
       <% if (resource[0].resourceLvl> 1) { %>
+        <div class="boxTitle">
+          <h2>Coût en matière première:</h2>
+        </div>
+        <div class="resultText">
+          <% rawMaterial.forEach(function(r) { %>
+            <p> - <%= r.quantity %> unités/min de <%= r.resourceName %></p>
+          <% }); %>
+        </div>
       <div class="boxTitle">
         <h2>Coût détaillé:</h2>
       </div>
@@ -63,24 +80,8 @@
           </div>
           <% } %>
         <% }); %>
-        <div class="boxTitle">
-          <h2>Coût en matière première:</h2>
-        </div>
-        <div class="resultText">
-          <% rawMaterial.forEach(function(r) { %>
-            <p> - <%= r.quantity %> unités/min de <%= r.resourceName %></p>
-          <% }); %>
-        </div>
+        
         <% } %>
-      <div class="boxTitle">
-        <h2>Coût en machine et électricité:</h2>
-      </div>
-      <div class="resultText">
-        <% nbrFactory.forEach(function(r) { %>
-          <p> - <%= r.nbr %> <%= r.factoryName %> (<%= r.price %> MW)</p>
-        <% }); %>
-        Total: <%= totalMW %> MW
-      </div>
     </div>
   </div>
 </body>
