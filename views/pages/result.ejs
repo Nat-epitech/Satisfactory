@@ -9,12 +9,12 @@
   <div class="container">
     <div class="containerBox resultBox">
       <div class="boxTitle">
-        <h2> Produire <%= quantity %> unités/min de <%= resource[0].resourceName %> </h2>
+        <h2> <img class="ressourceImg" src="/images/Ressources/<%= resource[0].idResource %>.png"></img> <%= quantity %> unités/min de <%= resource[0].resourceName %> </h2>
       </div>
       <div class="resultText">
         <% recetteResources.forEach(function(r) { %>
           <% if (r.resourceParent == -1) {%>
-            <p> - <%= r.quantity %> unités/min de <%= r.resourceName %></p>
+            <p> - <img class="ressourceImg" src="/images/Ressources/<%= r.idResource %>.png"> <%= r.quantity %> unités/min de <%= r.resourceName %></p>
           <% } %>
         <% }); %>
       </div>
@@ -33,7 +33,7 @@
         </div>
         <div class="resultText">
           <% rawMaterial.forEach(function(r) { %>
-            <p> - <%= r.quantity %> unités/min de <%= r.resourceName %></p>
+            <p> - <img class="ressourceImg" src="/images/Ressources/<%= r.idResource %>.png"> <%= r.quantity %> unités/min de <%= r.resourceName %></p>
           <% }); %>
         </div>
       <div class="boxTitle">
@@ -43,7 +43,7 @@
         <% if (rResParent.resourceParent==-1) { %>
           <div class="rowWrapper">
             <div class="rowIndex">
-              <p> <%= rResParent.quantity %> unités/min de <%= rResParent.resourceName %> </p>
+              <p> <img class="ressourceImg" src="/images/Ressources/<%= rResParent.idResource %>.png"> <%= rResParent.quantity %> unités/min de <%= rResParent.resourceName %> </p>
             </div>
             <div class="rowResult">
               <% var idTargets=[]; %>
@@ -57,7 +57,7 @@
                               <% if (rRes.resourceParent==idTargets[i]) { %>
                                 <div class="miniBoxWrapper">
                                 <div class="resultsMiniBox">
-                                  <p> <%= rRes.quantity %> unités/min de <%= rRes.resourceName %> </p>
+                                  <p class="image-with-text"> <img class="ressourceImg" src="/images/Ressources/<%= rRes.idResource %>.png"> <%= rRes.quantity %> unités/min de <%= rRes.resourceName %> </p>
                                 </div>
                                 <% foundElements.push(rRes.setId); %>
                                 <% if (rRes.resourceLvl> 0) { %>

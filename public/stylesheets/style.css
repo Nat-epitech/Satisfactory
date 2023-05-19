@@ -153,13 +153,24 @@ select {
 /* Result page */
 
 .resultBox {
-    width: 1200px;
+    min-width: 800px;
+    width: 70vw;
+    max-width: 1200px;
     max-height: 90vh;
     overflow-y: auto;
 }
 
 .resultText {
     padding: 20px;
+}
+
+.image-with-text {
+    display: inline-block;
+  }
+
+.ressourceImg{
+    height: 40px;
+    vertical-align: middle;
 }
 
 .rowWrapper {
