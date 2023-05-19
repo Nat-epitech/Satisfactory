@@ -112,7 +112,10 @@ router.get('/result', function (req, res, next) {
 		// for (let i = 0; i < recetteResources.length; i++) {
 		// 	console.log(recetteResources[i].setId + " " + recetteResources[i].resourceName + " " + recetteResources[i].resourceParent)
 		// }
-		res.render('pages/result', { resource, quantity: req.query.resourceQuantity, recetteResources, rawMaterial, nbrFactory, totalMW});
+		mysqlPool.query('SELECT * FROM resources WHERE resourceLvl > 0 ORDER BY resourceLvl;', (error, resources, fields) => {
+			if (error) throw error;
+			res.render('pages/result', {resources, resource, quantity: req.query.resourceQuantity, recetteResources, rawMaterial, nbrFactory, totalMW});
+		});
 	});
 });
 
