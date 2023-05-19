@@ -17,7 +17,8 @@
           <select name="resourceWanted" id="resourceWanted" required>
             <option disabled selected value="">Sélectionner une ressource</option>
             <% resources.forEach(function(r) { %>
-              <option value=<%=r.idResource %>><%= r.resourceName %>
+              <option value=<%=r.idResource %>>
+                <%= r.resourceName %>
               </option>
               <% }); %>
           </select>

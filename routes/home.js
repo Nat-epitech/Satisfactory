@@ -46,66 +46,73 @@ const getRessource = (request, quantity, setId) => {
 };
 
 router.get('/result', function (req, res, next) {
-	var recetteResourcesR = [];
-	var rawMaterialR = [];
-	var nbrFactoryR = [];
+	var recetteResources = [];
+	var rawMaterial = [];
+	var nbrFactory = [];
 	var finded;
 
-	mysqlPool.query('SELECT * FROM resources WHERE idResource = ?', [req.query.resourceWanted], async (error, resourceR, fields) => {
+	mysqlPool.query('SELECT * FROM resources WHERE idResource = ?', [req.query.resourceWanted], async (error, resource, fields) => {
 		if (error) throw error;
-		recetteResourcesR = recetteResourcesR.concat(await getRessource(req.query.resourceWanted, req.query.resourceQuantity, -1));
-		for (let i = 0; i < recetteResourcesR.length; i++) {
-			recetteResourcesR[i].setId = i;
-			if (recetteResourcesR[i].resourceLvl != 0) {
-				recetteResourcesR = recetteResourcesR.concat(await getRessource(recetteResourcesR[i].idResource, recetteResourcesR[i].quantity, recetteResourcesR[i].setId));
+		recetteResources = recetteResources.concat(await getRessource(req.query.resourceWanted, req.query.resourceQuantity, -1));
+		
+		//Calcul du cout détaillé
+		for (let i = 0; i < recetteResources.length; i++) {
+			recetteResources[i].setId = i;
+			if (recetteResources[i].resourceLvl != 0) {
+				recetteResources = recetteResources.concat(await getRessource(recetteResources[i].idResource, recetteResources[i].quantity, recetteResources[i].setId));
 			}
 		}
-		for (let i = 0; i < recetteResourcesR.length; i++) {
-			if (recetteResourcesR[i].resourceLvl == 0) {
+
+		//Calcul du cout en minerais
+		for (let i = 0; i < recetteResources.length; i++) {
+			if (recetteResources[i].resourceLvl == 0) {
 				finded = false
-				for (let j = 0; j < rawMaterialR.length; j++) {
-					if (rawMaterialR[j].idResource == recetteResourcesR[i].idResource) {
-						rawMaterialR[j].quantity += recetteResourcesR[i].quantity;
+				for (let j = 0; j < rawMaterial.length; j++) {
+					if (rawMaterial[j].idResource == recetteResources[i].idResource) {
+						rawMaterial[j].quantity += recetteResources[i].quantity;
 						finded = true;
 						break;
 					}
 				}
 				if (finded == false) {
-					const idResource = recetteResourcesR[i].idResource;
-					const resourceName = recetteResourcesR[i].resourceName;
-					const quantity = recetteResourcesR[i].quantity;
-					rawMaterialR.push({ idResource, resourceName, quantity });
+					const idResource = recetteResources[i].idResource;
+					const resourceName = recetteResources[i].resourceName;
+					const quantity = recetteResources[i].quantity;
+					rawMaterial.push({ idResource, resourceName, quantity });
 				}
 			}
 		}
 
+		//Calcul des marchines et cout en electicité
 		var resourceParentHistory = [];
-		for (let i = 0; i < recetteResourcesR.length; i++) {
-			var idFactory = recetteResourcesR[i].recetteFactory;
-			var factoryName = recetteResourcesR[i].factoryName;
+		let totalMW = 0;
+		for (let i = 0; i < recetteResources.length; i++) {
+			var idFactory = recetteResources[i].recetteFactory;
+			var factoryName = recetteResources[i].factoryName;
 			var nbr = 0;
 			var price = 0;
 
-
-			for (let j = 0; j < recetteResourcesR.length; j++) {
-				if (recetteResourcesR[j].recetteFactory == idFactory && !resourceParentHistory.includes(recetteResourcesR[j].resourceParent)) {
-					nbr += recetteResourcesR[j].nbrFactory;
-					price += recetteResourcesR[j].nbrFactory * recetteResourcesR[j].factoryPowerCost;
-					resourceParentHistory.push(recetteResourcesR[j].resourceParent);
+			for (let j = 0; j < recetteResources.length; j++) {
+				if (recetteResources[j].recetteFactory == idFactory && !resourceParentHistory.includes(recetteResources[j].resourceParent)) {
+					nbr += recetteResources[j].nbrFactory;
+					price += recetteResources[j].nbrFactory * recetteResources[j].factoryPowerCost;
+					resourceParentHistory.push(recetteResources[j].resourceParent);
 				}
 			}
 			if (nbr != 0) {
-				nbrFactoryR.push({ idFactory, factoryName, nbr, price });
+				nbrFactory.push({ idFactory, factoryName, nbr, price });
 			}
 		}
-		let totalMW = 0;
-		for (let i = 0; i < nbrFactoryR.length; i++) {
-			totalMW += nbrFactoryR[i].price;
+		for (let i = 0; i < nbrFactory.length; i++) {
+			nbrFactory[i].price = parseFloat(nbrFactory[i].price.toFixed(2));
+			nbrFactory[i].nbr = parseFloat(nbrFactory[i].price.toFixed(2));
+			totalMW += nbrFactory[i].price;
 		}
-		// for (let i = 0; i < recetteResourcesR.length; i++) {
-		// 	console.log(recetteResourcesR[i].setId + " " + recetteResourcesR[i].resourceName + " " + recetteResourcesR[i].resourceParent)
+		totalMW = parseFloat(totalMW.toFixed(2));
+		// for (let i = 0; i < recetteResources.length; i++) {
+		// 	console.log(recetteResources[i].setId + " " + recetteResources[i].resourceName + " " + recetteResources[i].resourceParent)
 		// }
-		res.render('pages/result', { resource: resourceR, quantity: req.query.resourceQuantity, recetteResources: recetteResourcesR, rawMaterial: rawMaterialR, nbrFactory: nbrFactoryR, totalMW});
+		res.render('pages/result', { resource, quantity: req.query.resourceQuantity, recetteResources, rawMaterial, nbrFactory, totalMW});
 	});
 });
 

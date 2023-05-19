@@ -23,7 +23,7 @@
       </div>
       <div class="resultText">
         <% nbrFactory.forEach(function(r) { %>
-          <p> - <%= r.nbr %> <%= r.factoryName %> (<%= r.price %> MW)</p>
+          <p> - <img class="ressourceImg" src="/images/Machines/<%= r.idFactory %>.png"> <%= r.nbr %> <%= r.factoryName %> (<%= r.price %> MW)</p>
         <% }); %>
         Total: <%= totalMW %> MW
       </div>
