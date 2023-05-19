@@ -117,5 +117,3 @@ router.get('/result', function (req, res, next) {
 });
 
 module.exports = router;
-
-
