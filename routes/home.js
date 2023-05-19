@@ -5,7 +5,7 @@ var mysql = require('mysql2');
 var router = express.Router();
 var mysqlPool = mysql.createPool({
 	host: "localhost",
-	user: "root",
+	user: "ndp",
 	database: "satisfdb",
 	password: "root",
 	connectionLimit: 100
