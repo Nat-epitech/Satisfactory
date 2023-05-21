@@ -16,7 +16,9 @@
         <label for="resourceWanted">Ressource:</label>
         <select name="resourceWanted" id="resourceWanted" required>
           <option disabled selected value="">Sélectionner une ressource</option>
-          <% resourcesourceName %>
+          <% resources.forEach(function(r) { %>
+            <option value="<%= r.idResource %>" data-image="/images/Ressources/<%= r.idResource %>.png">
+              <%= r.resourceName %>
             </option>
             <% }); %>
         </select>
