@@ -80,92 +80,95 @@ a:hover {
 .containerBox {
     color: white;
     background: rgba(34, 34, 34, 0.95);
-    width: 375px;
-    border: 1px solid #494949;
+    border: 1px solid black;
     border-radius: 5px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .boxTitle {
     background-color: rgb(68, 68, 68);
-    padding: 10px;
+    padding: 10px 20px;
     border-bottom: 1px solid white;
     width: 100%;
+}
+
+.centre{
+    text-align: center;
 }
 
 /* Error page */
 
 .errorBox {
-    display: flex;
+    padding: 25px;
+    width: 900px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-align: center;
+    text-align: justify;
 }
 
-.errorBox>* {
-    margin-bottom: 10px;
+.errorBox h3, .errorBox h1 {
+    margin-bottom: 20px;
 }
 
 .errorButton {
-    padding: 10px;
+    padding: 5px 10px;
 }
 
-/* Home page */
+/* form block */
 
-.homeBox {
-    padding: 25px;
-    display: flex;
-    justify-content: center;
-}
-
-.homeForm {
+.blockForm {
     font-family: "DIN2014";
-    display: grid;
-    grid-template-columns: 160px 170px;
-    grid-gap: 25px;
+    padding: 20px;
 }
 
-.homeForm button,
+.blockForm button,
 .errorButton {
     color: black;
     font-family: "AlternateGothicATF";
     font-size: 1em;
+    width: 100%;
+    height: 40px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    background-color: #F39C12;
+    border-radius: 5px;
     border-style: hidden;
     cursor: pointer;
-    background-color: #F39C12;
-    text-align: center;
-    border-radius: 5px;
-    grid-column: 1 / span 2;
 }
 
-.homeForm button:hover,
+.blockForm button:hover,
 .errorButton:hover {
     background-color: #b06f09;
 }
 
-input,
-select {
-    border: 1px solid #494949;
-    height: 30px;
+.blockForm input,
+.blockForm select{
+    font-family: "DIN2014";
+    border-radius: 5px;
+    display: block;
+    border: 2px solid black;
+    height: 40px;
+    width: 100%;
+    font-size: 0.9em;
+    margin-bottom: 20px;
 }
 
-/* Result page */
+/* Result block */
 
 .resultBox {
     width: 780px;
     max-height: 90vh;
     overflow-y: auto;
+    overflow-x: auto; 
 }
 
 .resultText {
     padding: 20px;
 }
 
-.image-with-text {
+.imageWithText {
     display: inline-block;
-  }
+}
 
 .ressourceImg{
     height: 40px;
@@ -173,7 +176,7 @@ select {
 }
 
 .scrollableWrapper{
-    overflow-x: auto;
+    overflow-x: auto; 
 }
 
 .rowWrapper {
@@ -223,5 +226,8 @@ select {
     .resultBox {
         width: 65vw;
         max-width: 1500px;
+    }
+    .ressourceImg{
+        height: 45px!important;
     }
 }

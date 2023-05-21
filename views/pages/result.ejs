@@ -11,22 +11,20 @@
       <div class="boxTitle">
         <h3>Produire:</h3>
       </div>
-      <div class="homeBox">
-        <form class="homeForm" action="/result" method="get">
-          <label for="resourceWanted">Ressource:</label>
-          <select name="resourceWanted" id="resourceWanted" required>
-            <option disabled value="">Sélectionner une ressource</option>
-            <% resources.forEach(function(r) { %>
-              <option value="<%= r.idResource %>" <% if (r.idResource == resource[0].idResource) { %>selected<% } %>>
-                <%= r.resourceName %>
-              </option>
-            <% }); %>
-          </select>
-          <label for="resourceQuantity">Unités par minute:</label>
-          <input type="number" name="resourceQuantity" placeholder="" id="resourceQuantity" min="1" value="<%= quantity %>" required>
-          <button>Calculer</button>
-        </form>        
-      </div>
+      <form class="blockForm" action="/result" method="get">
+        <label for="resourceWanted">Ressource:</label>
+        <select name="resourceWanted" id="resourceWanted" required>
+          <option disabled selected value="">Sélectionner une ressource</option>
+          <% resources.forEach(function(r) { %>
+            <option value="<%= r.idResource %>" <% if (r.idResource == resource[0].idResource) { %>selected<% } %>>
+              <%= r.resourceName %>
+            </option>
+          <% }); %>
+        </select>
+        <label for="resourceQuantity">Unités par minute:</label>
+        <input type="number" name="resourceQuantity" placeholder="" id="resourceQuantity" min="1" value="<%= quantity %>" required>
+        <button>Calculer</button>
+      </form>
     </div>
     <div class="containerBox resultBox">
       <div class="boxTitle">
@@ -63,7 +61,6 @@
       <div class="scrollableWrapper">
       <% recetteResources.forEach(function(rResParent) { %>
         <% if (rResParent.resourceParent==-1) { %>
-          
           <div class="rowWrapper">
             <div class="rowIndex">
               <p> <img class="ressourceImg" src="/images/Ressources/<%= rResParent.idResource %>.png"> <%= rResParent.quantity %> unités/min de <%= rResParent.resourceName %> </p>
@@ -80,7 +77,7 @@
                               <% if (rRes.resourceParent==idTargets[i]) { %>
                                 <div class="miniBoxWrapper">
                                 <div class="resultsMiniBox">
-                                  <p class="image-with-text"> <img class="ressourceImg" src="/images/Ressources/<%= rRes.idResource %>.png"> <%= rRes.quantity %> unités/min de <%= rRes.resourceName %> </p>
+                                  <p class="imageWithText"> <img class="ressourceImg" src="/images/Ressources/<%= rRes.idResource %>.png"> <%= rRes.quantity %> unités/min de <%= rRes.resourceName %> </p>
                                 </div>
                                 <% foundElements.push(rRes.setId); %>
                                 <% if (rRes.resourceLvl> 0) { %>
