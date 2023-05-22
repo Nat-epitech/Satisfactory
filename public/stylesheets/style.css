@@ -159,7 +159,6 @@ a:hover {
     width: 780px;
     max-height: 90vh;
     overflow-y: auto;
-    overflow-x: auto; 
 }
 
 .resultText {
@@ -175,14 +174,11 @@ a:hover {
     vertical-align: middle;
 }
 
-.scrollableWrapper{
-    overflow-x: auto; 
-}
-
 .rowWrapper {
     display: grid;
     grid-template-columns: 150px 1fr;
     border-bottom: 1px solid white;
+    overflow-x: auto; 
 }
 
 .rowIndex {
@@ -196,17 +192,12 @@ a:hover {
 .rowResult {
     display: grid;
     grid-template-columns: repeat(auto-fill, 205px);
+    grid-auto-flow: column;
 }
 
 .miniBoxWrapper{
     display: grid;
     grid-template-columns: 180px 20px;
-}
-
-.arrowBox {
-    display: flex;
-    align-items: center;
-    justify-content: right;
 }
 
 .resultsMiniBox {
@@ -217,6 +208,18 @@ a:hover {
     display: flex;
     align-items: center;
     text-align: center;
+    height: 125px;
+}
+
+.emptyMiniBox {
+    margin: 10px;
+    height: 125px;
+}
+
+.arrowBox {
+    display: flex;
+    align-items: center;
+    justify-content: right;
 }
 
 @media(min-width:1450px) {
@@ -229,5 +232,9 @@ a:hover {
     }
     .ressourceImg{
         height: 45px!important;
+    }
+    .resultsMiniBox,
+    .emptyMiniBox{
+        height: 175px;
     }
 }

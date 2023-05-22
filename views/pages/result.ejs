@@ -58,7 +58,6 @@
       <div class="boxTitle">
         <h2>Coût détaillé:</h2>
       </div>
-      <div class="scrollableWrapper">
       <% recetteResources.forEach(function(rResParent) { %>
         <% if (rResParent.resourceParent==-1) { %>
           <div class="rowWrapper">
@@ -86,6 +85,15 @@
                                     <i class="fa-solid fa-arrow-left"></i>
                                   </div>
                                 <% } %>
+                                <% var first = false; %>
+                                  <% recetteResources.forEach(function(rTmp) { %>
+                                    <% if (rTmp.resourceParent==rRes.setId && first == true) { %>
+                                      <div class="emptyMiniBox"></div>
+                                      <% } %>
+                                      <% if (rTmp.resourceParent==rRes.setId) { %>
+                                        <% first=true; %>
+                                      <% } %>
+                                  <% }); %>
                                 </div>
                               <% } %>
                             <% }); %>
@@ -100,7 +108,6 @@
           </div>
           <% } %>
         <% }); %>
-      </div>
         <% } %>
     </div>
   </div>
