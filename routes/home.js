@@ -62,6 +62,11 @@ router.get('/result', function (req, res, next) {
 				recetteResources = recetteResources.concat(await getRessource(recetteResources[i].idResource, recetteResources[i].quantity, recetteResources[i].setId));
 			}
 		}
+		//Formatage
+		for (let i = 0; i < recetteResources.length; i++) {
+			//console.log(recetteResources[i].setId + " " + recetteResources[i].resourceName + " " + recetteResources[i].resourceParent)
+			recetteResources[i].quantity = parseFloat(recetteResources[i].quantity.toFixed(2));
+		}
 
 		//Calcul du cout en minerais
 		for (let i = 0; i < recetteResources.length; i++) {
@@ -109,9 +114,7 @@ router.get('/result', function (req, res, next) {
 			totalMW += nbrFactory[i].price;
 		}
 		totalMW = parseFloat(totalMW.toFixed(2));
-		// for (let i = 0; i < recetteResources.length; i++) {
-		// 	console.log(recetteResources[i].setId + " " + recetteResources[i].resourceName + " " + recetteResources[i].resourceParent)
-		// }
+
 		mysqlPool.query('SELECT * FROM resources WHERE resourceLvl > 0 ORDER BY resourceLvl;', (error, resources, fields) => {
 			if (error) throw error;
 			res.render('pages/result', {resources, resource, quantity: req.query.resourceQuantity, recetteResources, rawMaterial, nbrFactory, totalMW});
