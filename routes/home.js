@@ -110,7 +110,7 @@ router.get('/result', function (req, res, next) {
 		}
 		for (let i = 0; i < nbrFactory.length; i++) {
 			nbrFactory[i].price = parseFloat(nbrFactory[i].price.toFixed(2));
-			nbrFactory[i].nbr = parseFloat(nbrFactory[i].price.toFixed(2));
+			nbrFactory[i].nbr = parseFloat(nbrFactory[i].nbr.toFixed(2));
 			totalMW += nbrFactory[i].price;
 		}
 		totalMW = parseFloat(totalMW.toFixed(2));
