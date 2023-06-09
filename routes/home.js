@@ -15,8 +15,6 @@ var mysqlPool = mysql.createPool({
 router.get('/', function (req, res) {
 	mysqlPool.query('SELECT * FROM resources WHERE resourceLvl > 0 ORDER BY resourceLvl;', (error, resourcesR, fields) => {
 		if (error) throw error;
-		const referer = req.headers.referer;
-	console.log("referer:" + referer);
 		res.render('pages/home', { resources: resourcesR });
 	});
 });
